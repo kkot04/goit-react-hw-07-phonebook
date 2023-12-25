@@ -1,0 +1,15 @@
+.contactList {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+}
+
+.errorMessage {
+  font-size: 22px;
+  font-style: italic;
+  text-align: center;
+}
