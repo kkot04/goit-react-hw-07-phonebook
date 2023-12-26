@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './ContactsItem.module.css';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'store/Slice';
+import { removeContactsThunk } from 'store/func';
 
 export const ContactsItem = ({ name, number, id }) => {
   const dispatch = useDispatch()
@@ -15,7 +15,7 @@ export const ContactsItem = ({ name, number, id }) => {
       <button
         className={s.deleteBtn}
         type="button"
-        onClick={() => dispatch(deleteContact(id))}
+        onClick={() => dispatch(removeContactsThunk(id))}
       >
         Delete
       </button>

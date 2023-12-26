@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ContactsItem } from '../ContactsItem/ContactsItem.jsx';
 import s from './ContactsList.module.css'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchContactsThunk } from 'store/func.js';
 
 export const ContactsList = ({children}) => {
-  const contacts = useSelector(state => state.phonebook.contacts);
+  const contacts = useSelector(state => state.phonebook.contacts.items);
   const filter = useSelector( state => state.phonebook.filter);
-  const filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(filter?.toLowerCase() || ''))
+  const error = useSelector(state => state.phonebook.contacts.error);
+
+  const dispatch = useDispatch();
+
+
+  useEffect(()=> {
+    dispatch(fetchContactsThunk())
+  }, [dispatch])
+
+  const filteredContacts = contacts?.filter(contact => 
+    contact.name.toLowerCase().includes(filter.toLowerCase() || '')
+    )
 
   return (
     <>
@@ -25,6 +37,7 @@ export const ContactsList = ({children}) => {
           ))}
         </ul>
       )}
+      {error && <p>{error}</p>}
     </>
   );
 };

@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import s from './ContactsForm.module.css';
-import { addContact } from 'store/Slice';
+import { addContactThunk } from 'store/func';
 
 export const ContactsForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.phonebook.contacts)
+  const contacts = useSelector(state => state.phonebook.contacts.items)
 
   const createContact = event => {
     event.preventDefault();
@@ -17,7 +17,7 @@ export const ContactsForm = () => {
       return;
     }
 
-    dispatch(addContact({name, number}))
+    dispatch(addContactThunk({name, number}))
     event.target.reset()
   };
 
