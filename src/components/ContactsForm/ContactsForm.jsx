@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import s from './ContactsForm.module.css';
-import { addContactThunk } from 'store/func';
+import { addContactThunk } from 'store/operations';
+import { selectContacts } from 'store/selector';
 
 export const ContactsForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.phonebook.contacts.items)
+  const contacts = useSelector(selectContacts)
 
   const createContact = event => {
     event.preventDefault();
